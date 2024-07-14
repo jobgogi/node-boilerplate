@@ -107,3 +107,25 @@ exports.update = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.remove = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const [{ msg }] = errors.errors;
+    return next(
+      new ErrorResponse(400, "ValidationError", req.originalUrl, {
+        errorCode: 9400,
+        errorMessage: msg,
+      })
+    );
+  }
+
+  try {
+    const { id } = req.params;
+    await userService.remove(id);
+    return res.sendResponse(204);
+  } catch (err) {
+    next(err);
+  }
+};

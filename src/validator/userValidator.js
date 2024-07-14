@@ -38,3 +38,7 @@ exports.updateValidator = [
     .isLength({ min: 3 })
     .withMessage("사용자 이름은 최소 3글자부터 입니다."),
 ];
+
+exports.removeValidator = [
+  param("id").isInt().withMessage("사용자 아이디는 숫자만 가능합니다."),
+];

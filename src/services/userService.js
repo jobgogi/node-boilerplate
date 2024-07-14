@@ -71,3 +71,11 @@ exports.update = async (id, data) => {
     throw err;
   }
 };
+
+/**
+ *
+ * @param {*} id
+ */
+exports.remove = async (id) => {
+  await userRepository.remove(id);
+};

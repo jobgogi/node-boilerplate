@@ -74,3 +74,20 @@ exports.update = async (id, data) => {
     throw error;
   }
 };
+
+exports.remove = async (id) => {
+  try {
+    const [result] = await db.execute("DELETE FROM users WHERE id = ?", [id]);
+
+    if (result.affectedRows === 0) {
+      throw new Error("User not found");
+    }
+
+    return true;
+  } catch (err) {
+    if (error.code === "ER_DUP_ENTRY") {
+      throw new Error("Username already exists");
+    }
+    throw error;
+  }
+};
