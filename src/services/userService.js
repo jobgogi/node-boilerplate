@@ -45,3 +45,29 @@ exports.getUserById = async (id) => {
   }
   return user;
 };
+
+/**
+ * 사용자 전체 목록
+ *
+ * @returns
+ */
+exports.getUsers = async () => {
+  const users = await userRepository.findAll();
+  return users;
+};
+
+/**
+ *
+ * @param {*} id
+ * @param {*} data
+ * @returns
+ */
+exports.update = async (id, data) => {
+  try {
+    await userRepository.update(id, data);
+    const user = await this.getUserById(id);
+    return user;
+  } catch (err) {
+    throw err;
+  }
+};

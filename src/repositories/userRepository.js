@@ -39,3 +39,38 @@ exports.findByEmail = async (email) => {
   );
   return rows[0];
 };
+
+exports.findAll = async () => {
+  const [rows] = await db.execute(
+    "SELECT id, username, email, created_at FROM users"
+  );
+
+  return rows;
+};
+
+/**
+ * 업데이트
+ *
+ * @param {*} id
+ * @param {*} data
+ * @returns
+ */
+exports.update = async (id, data) => {
+  try {
+    const [result] = await db.execute(
+      "UPDATE users SET username = ? WHERE id = ?",
+      [data.username, id]
+    );
+
+    if (result.affectedRows === 0) {
+      throw new Error("User not found");
+    }
+
+    return true;
+  } catch (err) {
+    if (error.code === "ER_DUP_ENTRY") {
+      throw new Error("Username already exists");
+    }
+    throw error;
+  }
+};
