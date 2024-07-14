@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const ErrorResponse = require("../utils/errorResponse");
 const logger = require("../config/logger");
+const userService = require("../services/userService");
 
 /**
  * 사용자 생성
@@ -23,7 +24,8 @@ exports.create = async (req, res, next) => {
   }
 
   try {
-    return res.sendResponse(201);
+    const user = await userService.createUser(req.body);
+    return res.sendResponse(201, user);
   } catch (err) {
     next(err);
   }
