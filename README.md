@@ -62,3 +62,12 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
+
+## 추가 설명
+
+라우트를 추가하고 싶으면 routes의 route 파일을 생성하고 `app.js`의 파일에 router를 포함 시키면 된다.
+
+```javascript
+// Route 설정 여기에 추가한다.
+app.use("/api/users", userRoute);
+```
