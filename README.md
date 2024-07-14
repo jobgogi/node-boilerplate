@@ -46,3 +46,19 @@
 - `helmet` - HTTP 설정
 - `cors` - CORS 해제
 - `rateLimit` - 일정 시간 내에 API 사용할 수 있는 횟수 제한
+
+## 데이터베이스
+
+사용 SQL은 MySQL
+테이블은 아래의 내용으로 테이블 하나 생성한다.
+
+```sql
+CREATE TABLE `users` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL UNIQUE,
+  `email` VARCHAR(100) NOT NULL UNIQUE,
+  `password` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
